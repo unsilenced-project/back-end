@@ -2,7 +2,7 @@ const router = require("express").Router();
 const restricted = require("../middleware/restricted");
 const dbHelpers = require("../models/user_model");
 
-router.get("/users", async (req, res, next) => {
+router.get("/users", restricted, async (req, res, next) => {
   try {
     const users = await dbHelpers.getAllUsers();
     res.status(200).json({ users });

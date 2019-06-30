@@ -93,7 +93,7 @@ OR
 }
 
 ```
-If require field are not preset it will return a object with message:
+If require field are preset it will return a object with message:
 
 ```
 {
@@ -167,12 +167,11 @@ If Successful, response should be 200 (OK). If unsuccessful, response should be 
 }
 ```
 
-In case the token is not present in the header it will respond with:
+In case the token is not present in the header it will respond with 401 status and the message:
 
 ```
-
 {
-"message": "Invalid Credentials"
+    "message": "You are not allowed !!"
 }
 
 ```

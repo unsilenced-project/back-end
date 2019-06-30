@@ -44,5 +44,6 @@ module.exports = {
   userSchema,
   getUserbyId,
   getAllUsers,
-  filter
+  filter,
+  registerUser
 };

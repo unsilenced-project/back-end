@@ -44,4 +44,22 @@ router.post(
   }
 );
 
+router.post("/login", async ({ body: creds }, res) => {
+  const { username, email, password } = creds;
+  const [user] =
+    (await Users.filter({ username })) || (await Users.filter({ email }));
+
+  if (user && bcrypt.compareSync(password, user.password)) {
+    const token = generateToken(user);
+    delete user.password;
+    res.status(200).json({
+      message: `Welcome, ${username}!`,
+      user,
+      token
+    });
+  } else {
+    res.status(401).json({ message: "Invalid Credentials" });
+  }
+});
+
 module.exports = router;

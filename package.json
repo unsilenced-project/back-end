@@ -1,0 +1,35 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "initdb": "knex init",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "tableUsers": "knex migrate:make usersTable",
+    "seedUsers": "knex seed:make 01-users",
+    "runseedUsers": "knex seed:run 01-users"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unsilenced-project/back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unsilenced-project/back-end/issues"
+  },
+  "homepage": "https://github.com/unsilenced-project/back-end#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

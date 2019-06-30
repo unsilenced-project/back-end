@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
-const dbHelpers = require("../models/userHelper");
+const dbHelpers = require("../models/user_model");
 const Joi = require("joi");
 const generateToken = require("../middleware/generateToken");
 
@@ -9,6 +9,19 @@ router.post(
   schemaValid(dbHelpers.userSchema),
   async (req, res) => {
     const creds = req.body;
+
+    let [existingUser] = await dbHelpers.filter({ username: creds.username });
+    if (existingUser)
+      return res.status(405).json({
+        message: "That username has already been taken."
+      });
+
+    let [existingUser] = await dbHelpers.filter({ username: creds.email });
+    if (existingUser)
+      return res.status(405).json({
+        message: "That username has already been taken."
+      });
+
     creds.password = bcrypt.hashSync(creds.password, 12);
 
     try {

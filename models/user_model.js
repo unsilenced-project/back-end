@@ -17,6 +17,32 @@ const userSchema = Joi.object().keys({
   social_links: Joi.string()
 });
 
+const getUserbyId = async id => {
+  const query = await db("users")
+    .where({ id })
+    .first();
+  return query;
+};
+
+const getAllUsers = async () => {
+  return await db("users");
+};
+
+const registerUser = async user => {
+  const [id] = await db("users").insert(user);
+  const query = await db("users")
+    .where({ id })
+    .first();
+  return query;
+};
+
+const filter = async query => {
+  return await db("users").where(query);
+};
+
 module.exports = {
-  userSchema
+  userSchema,
+  getUserbyId,
+  getAllUsers,
+  filter
 };

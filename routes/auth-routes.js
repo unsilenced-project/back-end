@@ -46,15 +46,23 @@ router.post(
 
 router.post("/login", async ({ body: creds }, res) => {
   const { username, email, password } = creds;
-  const [user] =
-    (await Users.filter({ username })) || (await Users.filter({ email }));
+  let [user] = "";
+  if (username) {
+    [user] = await dbHelpers.filter({ username });
+  } else if (email) {
+    [user] = await dbHelpers.filter({ email });
+  }
 
   if (user && bcrypt.compareSync(password, user.password)) {
     const token = generateToken(user);
     delete user.password;
     res.status(200).json({
-      message: `Welcome, ${username}!`,
-      user,
+      message: `Welcome, ${user.username}!`,
+      username: user.username,
+      email: user.email,
+      channelLink: user.channel_link,
+      channelName: user.channel_name,
+      socialLinks: user.social_links,
       token
     });
   } else {

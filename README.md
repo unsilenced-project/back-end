@@ -10,9 +10,7 @@ about the project here
 
 # Instructions
 
-All API requests are made to: **_ https://unsilenced.herokuapp.com_**
-
-This api is using **https://sendgrid.com/** for sending emails.
+All API requests are made to: **https://unsilenced.herokuapp.com**
 
 
 

@@ -117,9 +117,9 @@ If require field are not preset it will return a object with message:
 
 ## GET ALL Users
 
-a **GET** request to \_/api/users will return all the users existing in database
+a **GET** request to /users will return all the users existing in database
 
-URL: /api/users/
+URL: /users
 
 This route is restricted - a authorization header with the token its required
 

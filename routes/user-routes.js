@@ -2,9 +2,8 @@ const router = require("express").Router();
 const restricted = require("../middleware/restricted");
 const dbHelpers = require("../models/user_model");
 const sgMail = require("@sendgrid/mail"); //sendgrid library to send emails
+const uuid = require("uuid");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-const jwt = require("jsonwebtoken");
-import uuid from "uuid";
 
 router.get("/users", restricted, async (req, res, next) => {
   try {
@@ -77,15 +76,30 @@ router.post("/send-email", restricted, async (req, res) => {
     });
 
   existingUser.password = uuid();
+  if (existingUser) {
+    try {
+      const msg = {
+        to: existingUser.email,
+        from: "sorin.chis06@gmail.com",
+        subject: "Hello From Unsilenced, This is your new password",
+        text: `${
+          existingUser.password
+        } is your new password we recomand you to change it from the settings`
+      };
+
+      //Send Email
+      sgMail.send(msg).then(msg => {
+        console.log(msg);
+        res.end();
+      });
+      const result = await dbHelpers.update(existingUser.id, existingUser);
+      // console.log(req.decodedToken.password);
+    } catch (error) {
+      res.status({ error: "there was a error trying to send the email" });
+    }
+  }
 
   console.log(existingUser);
-
-  try {
-    const result = await dbHelpers.update(existingUser.id, existingUser);
-    // console.log(req.decodedToken.password);
-  } catch (error) {
-    res.status({ error: "there was a error trying to send the email" });
-  }
 });
 
 module.exports = router;

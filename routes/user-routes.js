@@ -2,7 +2,8 @@ const router = require("express").Router();
 const restricted = require("../middleware/restricted");
 const dbHelpers = require("../models/user_model");
 const sgMail = require("@sendgrid/mail"); //sendgrid library to send emails
-const uuid = require("uuid");
+var randomstring = require("randomstring");
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.get("/users", restricted, async (req, res, next) => {
@@ -75,7 +76,8 @@ router.post("/send-email", restricted, async (req, res) => {
       message: "This email doesn't exist, please register"
     });
 
-  existingUser.password = uuid();
+  existingUser.password = randomstring.generate(7);
+
   if (existingUser) {
     try {
       const msg = {
@@ -94,6 +96,12 @@ router.post("/send-email", restricted, async (req, res) => {
       });
       const result = await dbHelpers.update(existingUser.id, existingUser);
       // console.log(req.decodedToken.password);
+      if (result) {
+        res.status(200).json({
+          message:
+            "Password was changed and email was succesfullt sent to the user"
+        });
+      }
     } catch (error) {
       res.status({ error: "there was a error trying to send the email" });
     }

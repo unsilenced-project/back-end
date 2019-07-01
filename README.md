@@ -54,6 +54,8 @@ If posted succesfully, will return a object with message:
     "channelLink": "link for channel here",
 }
 ```
+Register request could take more optional fields like `channel_name` , `social_links` , `img_link` and `disqus_name`
+
 
 If require field are not preset it will return a object with message:
 
@@ -62,8 +64,6 @@ If require field are not preset it will return a object with message:
 {
     "message": "Please provide valid credentinals"
 }
-
-Register request could take more optional fields like `channel_name` and `social_links`
 
 ```
 
@@ -101,6 +101,8 @@ If require field are preset it will return a object with message:
     "channelLink": "https://www.youtube.com/channel/UCaziuyHLR37c2jBkHrYSQMA",
     "channelName": "best music",
     "socialLinks": "facebook tweeter",
+    "imgLink": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+    "disqusName": "",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6IlBhdm9sIiwiZW1pYWwiOiJwYXZvbEB0ZXN0LmNvbSIsImlhdCI6MTU2MTkyNzE2NiwiZXhwIjoxNTYxOTk5MTY2fQ.XGxi8_yUGNM6tNqNS6k_YJMXMOw_c39rfXG5JkuF-UA"
 }
 ```
@@ -136,6 +138,8 @@ If Successful, response should be 200 (OK). If unsuccessful, response should be 
             "channel_link": "https://www.youtube.com/channel/UCaziuyHLR37c2jBkHrYSQMA",
             "channel_name": "best music",
             "social_links": "facebook tweeter",
+	     "img_link": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+            "disqus_name": "",
             "created_at": "2019-06-30 18:06:13",
             "updated_at": "2019-06-30 18:06:13"
         },
@@ -147,6 +151,8 @@ If Successful, response should be 200 (OK). If unsuccessful, response should be 
             "channel_link": "https://www.youtube.com/channel/UCaziuyHLR37c2jBkHrYSQMA",
             "channel_name": "best music",
             "social_links": "facebook tweeter",
+	     "img_link": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+            "disqus_name": "",
             "created_at": "2019-06-30 18:06:13",
             "updated_at": "2019-06-30 18:06:13"
         },
@@ -158,6 +164,8 @@ If Successful, response should be 200 (OK). If unsuccessful, response should be 
             "channel_link": "https://www.youtube.com/channel/UCsMiwFQdEP5t_5a7CpGN7tQ",
             "channel_name": "sports for everyone",
             "social_links": "facebook tweeter",
+	     "img_link": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+            "disqus_name": "",
             "created_at": "2019-06-30 18:06:13",
             "updated_at": "2019-06-30 18:06:13"
         },
@@ -193,6 +201,8 @@ If Successful, response should be 200 (OK), should get a response of:
     "channel_link": "https://www.youtube.com/channel/UCKBmwzjp-6eFAW0HYNMWJ5w",
     "channel_name": "all about dance",
     "social_links": "facebook tweeter",
+    "img_link": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+    "disqus_name": "",
     "created_at": "2019-06-30 18:06:13",
     "updated_at": "2019-06-30 18:06:13"
 }

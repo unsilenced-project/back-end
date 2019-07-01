@@ -34,7 +34,7 @@ router.post(
         username: result.username,
         channelLink: result.channel_link,
         channelName: result.channel_name,
-        socialLinks: result.socialLinks
+        socialLinks: result.social_links
       });
     } catch (error) {
       res.status(500).json({

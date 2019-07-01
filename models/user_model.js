@@ -37,6 +37,12 @@ const filter = async query => {
   return await db("users").where(query);
 };
 
+const remove = async (id) => {
+  return await db('users').where({id}).del()
+}
+
+
+
 module.exports = {
   userSchema,
   getUserbyId,

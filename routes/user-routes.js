@@ -26,7 +26,7 @@ router.get("/users/:id", restricted, async (req, res, next) => {
   }
 });
 
-router.delete("/user/:id", restricted, async (req, res) => {
+router.delete("/users/:id", restricted, async (req, res) => {
   const { id } = req.params;
 
   try {

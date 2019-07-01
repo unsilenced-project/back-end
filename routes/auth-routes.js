@@ -34,7 +34,9 @@ router.post(
         username: result.username,
         channelLink: result.channel_link,
         channelName: result.channel_name,
-        socialLinks: result.social_links
+        socialLinks: result.social_links,
+        imgLink: result.img_link,
+        disqusName: result.disqus_name
       });
     } catch (error) {
       res.status(500).json({
@@ -63,6 +65,8 @@ router.post("/login", async ({ body: creds }, res) => {
       channelLink: user.channel_link,
       channelName: user.channel_name,
       socialLinks: user.social_links,
+      imgLink: user.img_link,
+      disqusName: user.disqus_name,
       token
     });
   } else {

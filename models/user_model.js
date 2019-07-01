@@ -21,6 +21,11 @@ const getUserbyId = async id => {
   return query;
 };
 
+const findUserByEmail = async email => {
+  const query = await db("users").where(email);
+  return query;
+};
+
 const getAllUsers = async () => {
   return await db("users");
 };
@@ -56,5 +61,6 @@ module.exports = {
   filter,
   registerUser,
   remove,
-  update
+  update,
+  findUserByEmail
 };

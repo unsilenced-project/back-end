@@ -54,6 +54,8 @@ If posted succesfully, will return a object with message:
     "channelLink": "link for channel here",
 }
 ```
+Register request could take more optional fields like `channel_name` , `social_links` , `img_link` and `disqus_name`
+
 
 If require field are not preset it will return a object with message:
 
@@ -62,8 +64,6 @@ If require field are not preset it will return a object with message:
 {
     "message": "Please provide valid credentinals"
 }
-
-Register request could take more optional fields like `channel_name` and `social_links`
 
 ```
 
@@ -101,6 +101,8 @@ If require field are preset it will return a object with message:
     "channelLink": "https://www.youtube.com/channel/UCaziuyHLR37c2jBkHrYSQMA",
     "channelName": "best music",
     "socialLinks": "facebook tweeter",
+    "imgLink": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+    "disqusName": "",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6IlBhdm9sIiwiZW1pYWwiOiJwYXZvbEB0ZXN0LmNvbSIsImlhdCI6MTU2MTkyNzE2NiwiZXhwIjoxNTYxOTk5MTY2fQ.XGxi8_yUGNM6tNqNS6k_YJMXMOw_c39rfXG5JkuF-UA"
 }
 ```
@@ -136,6 +138,8 @@ If Successful, response should be 200 (OK). If unsuccessful, response should be 
             "channel_link": "https://www.youtube.com/channel/UCaziuyHLR37c2jBkHrYSQMA",
             "channel_name": "best music",
             "social_links": "facebook tweeter",
+	     "img_link": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+            "disqus_name": "",
             "created_at": "2019-06-30 18:06:13",
             "updated_at": "2019-06-30 18:06:13"
         },
@@ -147,6 +151,8 @@ If Successful, response should be 200 (OK). If unsuccessful, response should be 
             "channel_link": "https://www.youtube.com/channel/UCaziuyHLR37c2jBkHrYSQMA",
             "channel_name": "best music",
             "social_links": "facebook tweeter",
+	     "img_link": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+            "disqus_name": "",
             "created_at": "2019-06-30 18:06:13",
             "updated_at": "2019-06-30 18:06:13"
         },
@@ -158,6 +164,8 @@ If Successful, response should be 200 (OK). If unsuccessful, response should be 
             "channel_link": "https://www.youtube.com/channel/UCsMiwFQdEP5t_5a7CpGN7tQ",
             "channel_name": "sports for everyone",
             "social_links": "facebook tweeter",
+	     "img_link": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+            "disqus_name": "",
             "created_at": "2019-06-30 18:06:13",
             "updated_at": "2019-06-30 18:06:13"
         },
@@ -173,3 +181,146 @@ In case the token is not present in the header it will respond with 401 status a
 }
 
 ```
+
+## GET Users By ID
+
+a **GET** request to /users/:id will return the user with specified ID
+
+URL: /users/:id
+
+This route is restricted - a authorization header with the token its required
+
+If Successful, response should be 200 (OK), should get a response of:
+
+```
+{
+    "id": 4,
+    "username": "Mat",
+    "email": "Mat@test.com",
+    "password": "$2a$12$x07OykJkm/vJnwhcIOt40uwpAkVH4zYLS8Luy0JqFUqC1r9ezVhxu",
+    "channel_link": "https://www.youtube.com/channel/UCKBmwzjp-6eFAW0HYNMWJ5w",
+    "channel_name": "all about dance",
+    "social_links": "facebook tweeter",
+    "img_link": "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+    "disqus_name": "",
+    "created_at": "2019-06-30 18:06:13",
+    "updated_at": "2019-06-30 18:06:13"
+}
+```
+
+If id does't exist in database will response with 404 and a message:
+
+```
+
+{
+    "message": "The specified ID not found"
+}
+
+```
+
+If unsuccessful, response should be 500 and the message `error: "Error trying to get a user by Id"`
+
+In case the token is not present in the header it will respond with:
+
+```
+{
+    "message": "You are not allowed !!"
+}
+```
+
+## EDIT (PUT) User
+
+URL: /users/:id
+
+This route is restricted - a authorization header with the token its required
+
+Example: Changing user 's `username` from Mat to Alin, and `email` from mat@test.com to alin@test.com
+
+```
+{
+    "username": "Alin",
+    "email": "alin@test.com"
+}
+```
+
+A successful post will return the updated user ID and a message. For example, the above edit will return:
+
+```
+{
+    "updateID": "4",
+    "message": "User: Alin Update succesfully"
+}
+```
+
+If user with specified ID does't exist in database will response with 404 and a message:
+
+```
+{
+     "message": "User was not found"
+
+}
+```
+
+If unsuccessful, response should be 500 and a message:
+
+```
+{
+    "error": "Error trying to update a user"
+}
+```
+
+## DELETE User
+
+URL: /users/:id
+
+This route is restricted - a authorization header with the token its required
+
+A successful delete will return a object with a message, for example deleting a user succesfully will return:
+
+```
+{
+    "message": "User was delete Succesfully"
+}
+```
+
+If user with specified ID does't exist in database will response with 404 and a message:
+
+```
+{
+    "message": "User was not found"
+}
+```
+---
+
+## (POST) Forgot Password
+
+URL: /send-email
+
+No token required
+
+
+Form will need `email` of the user. If email exists in database , should get a response of:
+
+Example data:
+```
+{
+	"email":"pavol@test.com"
+}
+RESPONSE IF SUCCESFULL
+{
+    "message": "Password was changed and email was succesfullt sent to the user"
+}
+```
+
+User will recive a message with :
+subject ` subject: "Hello From Unsilenced, This is your new password",` 
+text: `2ww2233` is your new password we recomand you to change it from the settings`
+
+In case the email its not in the database server will respond with:
+
+```
+{
+    "message": "This email doesn't exist, please register"
+}
+```
+

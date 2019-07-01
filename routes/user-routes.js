@@ -11,4 +11,19 @@ router.get("/users", restricted, async (req, res, next) => {
   }
 });
 
+router.get("/users/:id", restricted, async (req, res, next) => {
+  const { id } = req.params;
+
+  try{
+    const user = await dbHelpers.getUserbyId(id)
+    if(user){
+      res.status(200).json(user)
+    }else{
+      res.status(404).json({message: `The specified ID not found`});
+    }
+  }catch(error){
+    res.status(500).json({error:"Error trying to get a user by Id"})
+  }
+});
+
 module.exports = router;

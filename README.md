@@ -306,5 +306,11 @@ User will recive a message with :
 subject ` subject: "Hello From Unsilenced, This is your new password",` 
 text: `2ww2233` is your new password we recomand you to change it from the settings`
 
+In case the email its not in the database server will respond with:
 
+```
+{
+    "message": "This email doesn't exist, please register"
+}
+```
 

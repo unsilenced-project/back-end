@@ -15,7 +15,10 @@ exports.seed = function(knex, Promise) {
           channel_link:
             "https://www.youtube.com/channel/UCaziuyHLR37c2jBkHrYSQMA",
           channel_name: "best music",
-          social_links: "facebook tweeter"
+          social_links: "facebook tweeter",
+          img_link:
+            "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+          disqus_name: ""
         },
         {
           id: 2,
@@ -25,7 +28,10 @@ exports.seed = function(knex, Promise) {
           channel_link:
             "https://www.youtube.com/channel/UCaziuyHLR37c2jBkHrYSQMA",
           channel_name: "best music",
-          social_links: "facebook tweeter"
+          social_links: "facebook tweeter",
+          img_link:
+            "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+          disqus_name: ""
         },
         {
           id: 3,
@@ -35,7 +41,10 @@ exports.seed = function(knex, Promise) {
           channel_link:
             "https://www.youtube.com/channel/UCsMiwFQdEP5t_5a7CpGN7tQ",
           channel_name: "sports for everyone",
-          social_links: "facebook tweeter"
+          social_links: "facebook tweeter",
+          img_link:
+            "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+          disqus_name: ""
         },
         {
           id: 4,
@@ -45,7 +54,10 @@ exports.seed = function(knex, Promise) {
           channel_link:
             "https://www.youtube.com/channel/UCKBmwzjp-6eFAW0HYNMWJ5w",
           channel_name: "all about dance",
-          social_links: "facebook tweeter"
+          social_links: "facebook tweeter",
+          img_link:
+            "https://pixabay.com/illustrations/head-the-dummy-avatar-man-tie-659651/",
+          disqus_name: ""
         }
       ]);
     });

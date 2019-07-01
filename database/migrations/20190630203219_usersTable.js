@@ -13,6 +13,8 @@ exports.up = function(knex, Promise) {
     table.string("channel_link", 254).notNullable();
     table.string("channel_name", 255);
     table.string("social_links", 500);
+    table.string("img_link", 255);
+    table.string("disqus_name", 255);
     table.timestamps(true, true);
   });
 };

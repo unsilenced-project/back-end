@@ -68,7 +68,7 @@ router.put("/users/:id", restricted, async (req, res) => {
   }
 });
 
-router.post("/send-email", restricted, async (req, res) => {
+router.post("/send-email", async (req, res) => {
   const creds = req.body;
   let [existingUser] = await dbHelpers.filter({ email: creds.email });
   if (!existingUser)

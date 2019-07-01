@@ -37,16 +37,24 @@ const filter = async query => {
   return await db("users").where(query);
 };
 
-const remove = async (id) => {
-  return await db('users').where({id}).del()
-}
+const remove = async id => {
+  return await db("users")
+    .where({ id })
+    .del();
+};
 
-
+const update = async (id, changes) => {
+  return await db("users")
+    .where({ id })
+    .update(changes);
+};
 
 module.exports = {
   userSchema,
   getUserbyId,
   getAllUsers,
   filter,
-  registerUser
+  registerUser,
+  remove,
+  update
 };

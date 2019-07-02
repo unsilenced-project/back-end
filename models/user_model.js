@@ -10,8 +10,10 @@ const userSchema = Joi.object().keys({
     .required()
     .min(2),
   channel_link: Joi.string(),
-  channel_name: Joi.string(),
-  social_links: Joi.string()
+  channel_name: Joi.string().min(1),
+  social_links: Joi.string().min(1),
+  img_link: Joi.string().min(1),
+  disqus_name: Joi.string().min(1)
 });
 
 const getUserbyId = async id => {

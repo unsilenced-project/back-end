@@ -7,7 +7,6 @@ const schemaValid = require("../middleware/validate");
 
 router.post(
   "/register",
-  schemaValid(dbHelpers.userSchema),
   async (req, res) => {
     const creds = req.body;
 

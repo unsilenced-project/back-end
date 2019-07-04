@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
   if (token) {
     jwt.verify(token, secret, (err, decodedToken) => {
       if (err) {
-        req.status(401).json({ message: "You are not allowed" });
+        res.status(401).json({ message: "You are not allowed" });
       } else {
         req.decodedToken = decodedToken;
         next();

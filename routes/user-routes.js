@@ -3,6 +3,7 @@ const restricted = require("../middleware/restricted");
 const dbHelpers = require("../models/user_model");
 const sgMail = require("@sendgrid/mail"); //sendgrid library to send emails
 var randomstring = require("randomstring");
+const bcrypt = require("bcryptjs");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -53,12 +54,16 @@ router.put("/users/:id", restricted, async (req, res) => {
   const { id } = req.params;
   const user = req.body;
 
+  // update password if provided
+  if (user.password) {
+    user.password = bcrypt.hashSync(user.password, 12);
+  }
   try {
     const result = await dbHelpers.update(id, user);
     if (result === 1) {
       res.status(200).json({
         updateID: id,
-        message: `User: ${user.username} Update succesfully`
+        message: `Update succesfully`
       });
     } else {
       res.status(404).json({ message: "User was not found" });

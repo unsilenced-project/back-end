@@ -33,7 +33,9 @@ const getAllUsers = async () => {
 };
 
 const registerUser = async user => {
-  const [id] = await db("users").insert(user);
+  const [id] = await db("users")
+    .insert(user)
+    .returning("id");
   const query = await db("users")
     .where({ id })
     .first();

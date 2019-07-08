@@ -1,4 +1,13 @@
 // Update with your config settings.
+const localPgConnection = {
+  host: "localhost",
+  database: "unsilenced",
+  user: "sorin",
+  password: "pass"
+};
+
+const dbConection = process.env.DATABASE_URL || localPgConnection;
+
 module.exports = {
   development: {
     client: "sqlite3",
@@ -18,7 +27,7 @@ module.exports = {
     connection: {
       filename: "./database/test_database.sqlite3"
     },
-    useNullAsDefault: true,
+    useNullAsDefault: true, //this is needed only for sqlite
     migrations: {
       directory: "./database/migrations"
     },
@@ -27,12 +36,8 @@ module.exports = {
     }
   },
   production: {
-    client: "sqlite3",
-    connection: {
-      database: "my_db",
-      user: "username",
-      password: "password"
-    },
+    client: "pg",
+    connection: dbConection,
     pool: {
       min: 2,
       max: 10

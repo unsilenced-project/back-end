@@ -80,18 +80,17 @@ router.post("/send-email", async (req, res) => {
     return res.status(405).json({
       message: "This email doesn't exist, please register"
     });
-
-  existingUser.password = randomstring.generate(7);
-
+  const newPassword = randomstring.generate(7);
+  //console.log("before", newPassword);
+  existingUser.password = bcrypt.hashSync(newPassword, 12);
+  //console.log("after", existingUser.password);
   if (existingUser) {
     try {
       const msg = {
         to: existingUser.email,
         from: "sorin.chis06@gmail.com",
         subject: "Hello From Unsilenced, This is your new password",
-        text: `${
-          existingUser.password
-        } is your new password we recomand you to change it from the settings`
+        text: `${newPassword} is your new password we recomand you to change it from the settings`
       };
 
       //Send Email

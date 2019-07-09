@@ -42,16 +42,16 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async ({ body: creds }, res) => {
-  const { username, email, password } = creds;
+router.post("/login", async (req, res) => {
+  let { username, email, password } = req.body;
   let [user] = "";
   if (username) {
     [user] = await dbHelpers.filter({ username });
   } else if (email) {
     [user] = await dbHelpers.filter({ email });
   }
-  creds.password = bcrypt.hashSync(creds.password, 12);
-  if (user && bcrypt.compareSync(creds.password, user.password)) {
+ //password = bcrypt.hashSync(password, 12);
+  if (user && bcrypt.compareSync(password, user.password)) {
     const token = generateToken(user);
     delete user.password;
     res.status(200).json({

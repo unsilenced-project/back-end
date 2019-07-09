@@ -51,7 +51,7 @@ router.post("/login", async ({ body: creds }, res) => {
     [user] = await dbHelpers.filter({ email });
   }
   creds.password = bcrypt.hashSync(creds.password, 12);
-  if (user && bcrypt.compareSync(password, user.password)) {
+  if (user && bcrypt.compareSync(creds.password, user.password)) {
     const token = generateToken(user);
     delete user.password;
     res.status(200).json({
